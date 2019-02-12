@@ -74,14 +74,11 @@ var FixedDataTableCellGroupImpl = createReactClass({
      * Flag to identify whether it's a footer cell group or not
      */
     isFooterCellGroup: PropTypes.bool,
-  },
 
-  componentWillMount() {
-    this._initialRender = true;
-  },
-
-  componentDidMount() {
-    this._initialRender = false;
+    /**
+     * Style object for cell group
+     */
+    cellGroupStyle: PropTypes.object,
   },
 
   render() /*object*/ {
@@ -123,7 +120,13 @@ var FixedDataTableCellGroupImpl = createReactClass({
       width: contentWidth,
       zIndex: props.zIndex,
     };
-    FixedDataTableTranslateDOMPosition(style, -1 * DIR_SIGN * props.left, 0, this._initialRender);
+    if (props.cellGroupStyle) {
+      style = {
+        ...props.cellGroupStyle,
+        ...style,
+      }
+    }
+    FixedDataTableTranslateDOMPosition(style, -1 * DIR_SIGN * props.left, 0, false);
 
     return (
       <div
@@ -258,14 +261,11 @@ var FixedDataTableCellGroup = createReactClass({
     var onColumnResize = props.onColumnResize ? this._onColumnResize : null;
 
     return (
-      <div
-        style={style}
-        className={cx('fixedDataTableCellGroupLayout/cellGroupWrapper')}>
-        <FixedDataTableCellGroupImpl
-          {...props}
-          onColumnResize={onColumnResize}
-        />
-      </div>
+      <FixedDataTableCellGroupImpl
+        {...props}
+        cellGroupStyle={style}
+        onColumnResize={onColumnResize}
+      />
     );
   },
 
