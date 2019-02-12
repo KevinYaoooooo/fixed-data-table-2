@@ -63,7 +63,17 @@ var FixedDataTableCellGroupImpl = createReactClass({
 
     zIndex: PropTypes.number.isRequired,
 
-    touchEnabled: PropTypes.bool
+    touchEnabled: PropTypes.bool,
+
+    /**
+     * Flag to identify whether it's a header cell group or not
+     */
+    isHeaderCellGroup: PropTypes.bool,
+
+    /**
+     * Flag to identify whether it's a footer cell group or not
+     */
+    isFooterCellGroup: PropTypes.bool,
   },
 
   componentWillMount() {
@@ -100,7 +110,9 @@ var FixedDataTableCellGroupImpl = createReactClass({
           currentPosition,
           key,
           contentWidth,
-          isColumnReordering
+          isColumnReordering,
+          props.isHeaderCellGroup,
+          props.isFooterCellGroup
         );
       }
       currentPosition += columnProps.width;
@@ -130,7 +142,10 @@ var FixedDataTableCellGroupImpl = createReactClass({
     /*string*/ key,
     /*number*/ columnGroupWidth,
     /*boolean*/ isColumnReordering,
+    /*boolean*/ isHeaderCell,
+    /*boolean*/ isFooterCell,
   ) /*object*/ {
+
 
     var cellIsResizable = columnProps.isResizable &&
       this.props.onColumnResize;
@@ -139,8 +154,16 @@ var FixedDataTableCellGroupImpl = createReactClass({
     var cellIsReorderable = columnProps.isReorderable && this.props.onColumnReorder && rowIndex === -1 && columnGroupWidth !== columnProps.width;
     var onColumnReorder = cellIsReorderable ? this.props.onColumnReorder : null;
 
-    var className = columnProps.cellClassName;
+    // var className = columnProps.cellClassName;
     var pureRendering = columnProps.pureRendering || false;
+
+    var className;
+    if (isHeaderCell || isFooterCell) {
+      className = isHeaderCell ?
+        columnProps.headerCellClassName : columnProps.footerCellClassName;
+    } else {
+      className = columnProps.cellClassName;
+    }
 
     return (
       <FixedDataTableCell

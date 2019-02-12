@@ -632,6 +632,7 @@ var FixedDataTable = createReactClass({
             cx('fixedDataTableLayout/header'),
             cx('public/fixedDataTable/header'),
           )}
+          isHeaderRow
           width={state.width}
           height={state.groupHeaderHeight}
           cellGroupWrapperHeight={state.cellGroupWrapperHeight}
@@ -727,6 +728,7 @@ var FixedDataTable = createReactClass({
             cx('fixedDataTableLayout/footer'),
             cx('public/fixedDataTable/footer'),
           )}
+          isFooterRow
           width={state.width}
           height={state.footerHeight}
           index={-1}
@@ -750,6 +752,7 @@ var FixedDataTable = createReactClass({
           cx('fixedDataTableLayout/header'),
           cx('public/fixedDataTable/header'),
         )}
+        isHeaderRow
         width={state.width}
         height={state.headerHeight}
         cellGroupWrapperHeight={state.cellGroupWrapperHeight}
