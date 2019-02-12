@@ -415,6 +415,11 @@ var FixedDataTable = createReactClass({
      * half of the number of visible rows.
      */
     bufferRowCount: PropTypes.number,
+
+    /**
+     * Flag to disable resize ability, which will not render a drag knob layer.
+     */
+    disableResize: PropTypes.bool,
   },
 
   getDefaultProps() /*object*/ {
@@ -427,7 +432,9 @@ var FixedDataTable = createReactClass({
       touchScrollEnabled: false,
       keyboardScrollEnabled: false,
       keyboardPageEnabled: false,
-      stopScrollPropagation: false
+      stopScrollPropagation: false,
+
+      disableResize: false,
     };
   },
 
@@ -643,7 +650,7 @@ var FixedDataTable = createReactClass({
           fixedColumns={state.groupHeaderFixedColumns}
           fixedRightColumns={state.groupHeaderFixedRightColumns}
           scrollableColumns={state.groupHeaderScrollableColumns}
-          onColumnResize={this._onColumnResize}
+          onColumnResize={props.disableResize ? null : this._onColumnResize}
           onColumnReorder={onColumnReorder}
           onColumnReorderMove={this._onColumnReorderMove}
           showScrollbarY={showScrollbarY}
@@ -703,20 +710,23 @@ var FixedDataTable = createReactClass({
         />;
     }
 
-    var dragKnob =
-      <FixedDataTableColumnResizeHandle
-        height={state.height}
-        initialWidth={state.columnResizingData.width || 0}
-        minWidth={state.columnResizingData.minWidth || 0}
-        maxWidth={state.columnResizingData.maxWidth || Number.MAX_VALUE}
-        visible={!!state.isColumnResizing}
-        leftOffset={state.columnResizingData.left || 0}
-        knobHeight={state.headerHeight}
-        initialEvent={state.columnResizingData.initialEvent}
-        onColumnResizeEnd={props.onColumnResizeEndCallback}
-        columnKey={state.columnResizingData.key}
-        touchEnabled={state.touchScrollEnabled}
-      />;
+    var dragKnob;
+    if (!this.props.disableResize) {
+      dragKnob =
+        <FixedDataTableColumnResizeHandle
+          height={state.height}
+          initialWidth={state.columnResizingData.width || 0}
+          minWidth={state.columnResizingData.minWidth || 0}
+          maxWidth={state.columnResizingData.maxWidth || Number.MAX_VALUE}
+          visible={!!state.isColumnResizing}
+          leftOffset={state.columnResizingData.left || 0}
+          knobHeight={state.headerHeight}
+          initialEvent={state.columnResizingData.initialEvent}
+          onColumnResizeEnd={props.onColumnResizeEndCallback}
+          columnKey={state.columnResizingData.key}
+          touchEnabled={state.touchScrollEnabled}
+        />;
+    }
 
     var footer = null;
     if (state.footerHeight) {
@@ -764,7 +774,7 @@ var FixedDataTable = createReactClass({
         fixedRightColumns={state.headFixedRightColumns}
         scrollableColumns={state.headScrollableColumns}
         touchEnabled={state.touchScrollEnabled}
-        onColumnResize={this._onColumnResize}
+        onColumnResize={props.disableResize ? null : this._onColumnResize}
         onColumnReorder={onColumnReorder}
         onColumnReorderMove={this._onColumnReorderMove}
         onColumnReorderEnd={this._onColumnReorderEnd}
