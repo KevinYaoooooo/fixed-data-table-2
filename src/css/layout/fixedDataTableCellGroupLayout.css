@@ -24,6 +24,21 @@
   white-space: normal;
 }
 
+.fixedDataTableCellGroupLayout/soloCell {
+  backface-visibility: hidden;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.fixedDataTableCellGroupLayout/soloCell.public/fixedDataTableCell/main {
+  display: inline-block;
+  vertical-align: top;
+  white-space: normal;
+}
+
 .fixedDataTableCellGroupLayout/cellGroupWrapper {
   position: absolute;
   top: 0;

@@ -128,6 +128,15 @@ var FixedDataTableCellGroupImpl = createReactClass({
     }
     FixedDataTableTranslateDOMPosition(style, -1 * DIR_SIGN * props.left, 0, false);
 
+    // only one single cell, no need to wrapper with cellGroup
+    if (cells.length === 1) {
+      const Cell = cells[0];
+      return React.cloneElement(Cell, {
+        soloCellStyle: style,
+        soloCellClassName: cx('fixedDataTableCellGroupLayout/soloCell'),
+      });
+    }
+
     return (
       <div
         className={cx('fixedDataTableCellGroupLayout/cellGroup')}

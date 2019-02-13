@@ -89,7 +89,21 @@ var FixedDataTableCell = createReactClass({
     /**
      * Whether touch is enabled or not.
      */
-    touchEnabled: PropTypes.bool
+    touchEnabled: PropTypes.bool,
+
+    /**
+     * Style for extra style
+     */
+    singleCellClassName: PropTypes.object,
+
+    /**
+     * Style for solo cell
+     */
+    soloCellStyle: PropTypes.object,
+    /**
+     * ClassName for solo cell
+     */
+    soloCellClassName: PropTypes.object
   },
 
   getInitialState() {
@@ -237,6 +251,7 @@ var FixedDataTableCell = createReactClass({
         'public/fixedDataTableCell/hasReorderHandle': !!props.onColumnReorder,
         'public/fixedDataTableCell/reordering': this.state.isReorderingThisColumn,
       }),
+      props.soloCellClassName,
       props.className,
     );
 
@@ -304,6 +319,13 @@ var FixedDataTableCell = createReactClass({
           {props.cell}
         </FixedDataTableCellDefault>
       );
+    }
+
+    if (props.soloCellStyle) {
+      style = {
+        ...style,
+        ...props.soloCellStyle
+      }
     }
 
     return (
