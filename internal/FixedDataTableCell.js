@@ -117,11 +117,6 @@ var FixedDataTableCell = (0, _createReactClass2.default)({
     touchEnabled: _propTypes2.default.bool,
 
     /**
-     * Style for extra style
-     */
-    singleCellClassName: _propTypes2.default.object,
-
-    /**
      * Style for solo cell
      */
     soloCellStyle: _propTypes2.default.object,
