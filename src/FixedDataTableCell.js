@@ -92,11 +92,6 @@ var FixedDataTableCell = createReactClass({
     touchEnabled: PropTypes.bool,
 
     /**
-     * Style for extra style
-     */
-    singleCellClassName: PropTypes.object,
-
-    /**
      * Style for solo cell
      */
     soloCellStyle: PropTypes.object,
