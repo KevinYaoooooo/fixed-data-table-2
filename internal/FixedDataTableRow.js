@@ -170,9 +170,11 @@ var FixedDataTableRowImpl = function (_React$Component) {
     key: 'render',
     value: function render() /*object*/{
       var subRowHeight = this.props.subRowHeight || 0;
+      var rowTotalHeight = this.props.height + subRowHeight;
       var style = {
         width: this.props.width,
-        height: this.props.height + subRowHeight
+        height: rowTotalHeight,
+        lineHeight: rowTotalHeight + 'px'
       };
       var className = (0, _cx2.default)({
         'fixedDataTableRowLayout/main': true,
@@ -457,6 +459,7 @@ var FixedDataTableRow = function (_React$Component2) {
       var style = {
         width: this.props.width,
         height: this.props.height,
+        lineHeight: this.props.height + 'px',
         zIndex: this.props.zIndex ? this.props.zIndex : 0
       };
       (0, _FixedDataTableTranslateDOMPosition2.default)(style, 0, this.props.offsetTop, this._initialRender);

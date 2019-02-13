@@ -129,6 +129,7 @@ var FixedDataTableCellGroupImpl = (0, _createReactClass2.default)({
     }
     var style = {
       height: props.height,
+      lineHeight: props.height + 'px',
       position: 'absolute',
       width: contentWidth,
       zIndex: props.zIndex
