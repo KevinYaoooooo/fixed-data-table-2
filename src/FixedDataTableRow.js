@@ -160,9 +160,11 @@ class FixedDataTableRowImpl extends React.Component {
 
   render() /*object*/ {
     var subRowHeight = this.props.subRowHeight || 0;
+    var rowTotalHeight = this.props.height + subRowHeight;
     var style = {
       width: this.props.width,
-      height: this.props.height + subRowHeight,
+      height: rowTotalHeight,
+      lineHeight: `${rowTotalHeight}px`,
     };
     var className = cx({
       'fixedDataTableRowLayout/main': true,
@@ -197,7 +199,7 @@ class FixedDataTableRowImpl extends React.Component {
     var columnsLeftShadow = this._renderColumnsLeftShadow(fixedColumnsWidth);
     var fixedRightColumnsWidth = this._getColumnsWidth(this.props.fixedRightColumns);
     var scrollbarOffset = this.props.showScrollbarY ? Scrollbar.SIZE : 0;
-    var fixedRightColumns = 
+    var fixedRightColumns =
       <FixedDataTableCellGroup
         key="fixed_right_cells"
         isScrolling={this.props.isScrolling}
@@ -262,8 +264,8 @@ class FixedDataTableRowImpl extends React.Component {
         left: this.props.width - scrollbarOffset,
       };
       scrollbarSpacer =
-        <div 
-          style={spacerStyles} 
+        <div
+          style={spacerStyles}
           className={cx('public/fixedDataTable/scrollbarSpacer')}
         />;
     }
@@ -466,6 +468,7 @@ class FixedDataTableRow extends React.Component {
     var style = {
       width: this.props.width,
       height: this.props.height,
+      lineHeight: `${this.props.height}px`,
       zIndex: (this.props.zIndex ? this.props.zIndex : 0),
     };
     FixedDataTableTranslateDOMPosition(style, 0, this.props.offsetTop, this._initialRender);

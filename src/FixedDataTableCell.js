@@ -220,6 +220,7 @@ var FixedDataTableCell = createReactClass({
 
     var style = {
       height,
+      lineHeight: `${height}px`,
       width,
     };
 
