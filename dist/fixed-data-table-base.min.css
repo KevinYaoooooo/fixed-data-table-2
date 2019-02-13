@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.8.19 
+ * FixedDataTable v0.8.21 
  *
  * Copyright Schrodinger, LLC
  * All rights reserved.
@@ -31,6 +31,22 @@
 }
 
 .fixedDataTableCellGroupLayout_cellGroup > .public_fixedDataTableCell_main {
+  display: inline-block;
+  vertical-align: top;
+  white-space: normal;
+}
+
+.fixedDataTableCellGroupLayout_soloCell {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.fixedDataTableCellGroupLayout_soloCell.public_fixedDataTableCell_main {
   display: inline-block;
   vertical-align: top;
   white-space: normal;

@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.8.19 
+ * FixedDataTable v0.8.21 
  *
  * Copyright Schrodinger, LLC
  * All rights reserved.
@@ -8695,6 +8695,15 @@ var FixedDataTableCellGroupImpl = (0, _createReactClass2.default)({
     }
     (0, _FixedDataTableTranslateDOMPosition2.default)(style, -1 * DIR_SIGN * props.left, 0, false);
 
+    // only one single cell, no need to wrapper with cellGroup
+    if (cells.length === 1) {
+      var Cell = cells[0];
+      return _React2.default.cloneElement(Cell, {
+        soloCellStyle: style,
+        soloCellClassName: (0, _cx2.default)('fixedDataTableCellGroupLayout/soloCell')
+      });
+    }
+
     return _React2.default.createElement(
       'div',
       {
@@ -8954,7 +8963,21 @@ var FixedDataTableCell = (0, _createReactClass2.default)({
     /**
      * Whether touch is enabled or not.
      */
-    touchEnabled: _propTypes2.default.bool
+    touchEnabled: _propTypes2.default.bool,
+
+    /**
+     * Style for extra style
+     */
+    singleCellClassName: _propTypes2.default.object,
+
+    /**
+     * Style for solo cell
+     */
+    soloCellStyle: _propTypes2.default.object,
+    /**
+     * ClassName for solo cell
+     */
+    soloCellClassName: _propTypes2.default.object
   },
 
   getInitialState: function getInitialState() {
@@ -9102,7 +9125,7 @@ var FixedDataTableCell = (0, _createReactClass2.default)({
       'public/fixedDataTableCell/main': true,
       'public/fixedDataTableCell/hasReorderHandle': !!props.onColumnReorder,
       'public/fixedDataTableCell/reordering': this.state.isReorderingThisColumn
-    }), props.className);
+    }), props.soloCellClassName, props.className);
 
     var columnResizerComponent;
     if (props.onColumnResize) {
@@ -9164,6 +9187,10 @@ var FixedDataTableCell = (0, _createReactClass2.default)({
         cellProps,
         props.cell
       );
+    }
+
+    if (props.soloCellStyle) {
+      style = _extends({}, style, props.soloCellStyle);
     }
 
     return _React2.default.createElement(
