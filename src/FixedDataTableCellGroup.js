@@ -12,6 +12,8 @@
 
 'use strict';
 
+import './css/layout/fixedDataTableCellGroupLayout.css';
+
 import FixedDataTableHelper from 'FixedDataTableHelper';
 import React from 'React';
 import createReactClass from 'create-react-class';

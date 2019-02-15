@@ -14,6 +14,9 @@
  * @typechecks
  */
 
+import './css/layout/fixedDataTableColumnResizerLineLayout.css';
+import './css/style/fixedDataTableColumnResizerLine.css';
+
 import DOMMouseMoveTracker from 'DOMMouseMoveTracker';
 import Locale from 'Locale';
 import React from 'React';

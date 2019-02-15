@@ -10,6 +10,8 @@
  * @typechecks
  */
 
+import './css/style/fixedDataTableCell.css';
+
 import FixedDataTableCellDefault from 'FixedDataTableCellDefault';
 import FixedDataTableColumnReorderHandle from './FixedDataTableColumnReorderHandle';
 import FixedDataTableHelper from 'FixedDataTableHelper';

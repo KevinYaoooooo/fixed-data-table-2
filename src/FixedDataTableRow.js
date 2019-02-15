@@ -12,6 +12,9 @@
 
 'use strict';
 
+import './css/style/fixedDataTableRow.css';
+import './css/layout/fixedDataTableRowLayout.css';
+
 import React from 'React';
 import PropTypes from 'prop-types';
 import FixedDataTableCellGroup from 'FixedDataTableCellGroup';
