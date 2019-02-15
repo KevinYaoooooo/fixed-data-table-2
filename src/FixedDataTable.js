@@ -858,12 +858,12 @@ var FixedDataTable = createReactClass({
     var props = this.props;
     var noRowRenderer = props.noRowRenderer;
     var noRowContent = typeof noRowRenderer === 'function' ? noRowRenderer() : noRowRenderer;
-    var rowHeight = props.rowHeight;
-    var noRowHeight = `calc(100% - ${rowHeight}px)`;
+    var headerHeight = props.headerHeight;
+    var noRowHeight = `calc(100% - ${headerHeight}px)`;
 
     return (
       <div
-        style={{ top: rowHeight, width: '100%', height: noRowHeight }}
+        style={{ top: headerHeight, width: '100%', height: noRowHeight }}
         className={cx('fixedDataTableLayout/noRowWrapper')}>
         {noRowContent}
       </div>
