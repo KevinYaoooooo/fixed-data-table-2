@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.8.24 
+ * FixedDataTable v0.8.25 
  *
  * Copyright Schrodinger, LLC
  * All rights reserved.
@@ -93,7 +93,9 @@
 }
 
 .public_fixedDataTableCell_cellContent {
-  padding: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  text-align: left;
 }
 
 .public_fixedDataTableCell_columnResizerKnob {

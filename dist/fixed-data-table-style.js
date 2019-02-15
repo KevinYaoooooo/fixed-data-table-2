@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.8.24 
+ * FixedDataTable v0.8.25 
  *
  * Copyright Schrodinger, LLC
  * All rights reserved.
@@ -86,35 +86,35 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
+/***/ 15:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 16:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 17:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 18:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 19:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 20:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 21:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 22:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 23:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -131,12 +131,12 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ 44:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(19);
-__webpack_require__(20);
-__webpack_require__(21);
-__webpack_require__(22);
-__webpack_require__(23);
-module.exports = __webpack_require__(24);
+__webpack_require__(15);
+__webpack_require__(16);
+__webpack_require__(24);
+__webpack_require__(17);
+__webpack_require__(18);
+module.exports = __webpack_require__(19);
 
 
 /***/ })
