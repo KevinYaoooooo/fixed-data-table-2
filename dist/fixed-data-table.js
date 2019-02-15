@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.8.22 
+ * FixedDataTable v0.8.23 
  *
  * Copyright Schrodinger, LLC
  * All rights reserved.
@@ -3650,6 +3650,11 @@ var FixedDataTable = (0, _createReactClass2.default)({
     rowsCount: _propTypes2.default.number.isRequired,
 
     /**
+     * Render the placeholder content if no rows (rowCount = 0).
+     */
+    noRowRenderer: _propTypes2.default.oneOfType([_propTypes2.default.node, _propTypes2.default.func]),
+
+    /**
      * Pixel height of rows unless `rowHeightGetter` is specified and returns
      * different value.
      */
@@ -3901,7 +3906,8 @@ var FixedDataTable = (0, _createReactClass2.default)({
       keyboardPageEnabled: false,
       stopScrollPropagation: false,
 
-      disableResize: false
+      disableResize: false,
+      noRowRenderer: null
     };
   },
   componentWillMount: function componentWillMount() {
@@ -4234,8 +4240,27 @@ var FixedDataTable = (0, _createReactClass2.default)({
       horizontalScrollbar
     );
   },
+  _renderNoRow: function _renderNoRow() {
+    var props = this.props;
+    var noRowRenderer = props.noRowRenderer;
+    var noRowContent = typeof noRowRenderer === 'function' ? noRowRenderer() : noRowRenderer;
+    var rowHeight = props.rowHeight;
+    var noRowHeight = 'calc(100% - ' + rowHeight + 'px)';
+
+    return _React2.default.createElement(
+      'div',
+      {
+        style: { top: rowHeight, width: '100%', height: noRowHeight },
+        className: (0, _cx2.default)('fixedDataTableLayout/noRowWrapper') },
+      noRowContent
+    );
+  },
   _renderRows: function _renderRows( /*number*/offsetTop) /*object*/{
     var state = this.state;
+    if (state.rowsCount <= 0) {
+      return this._renderNoRow();
+    }
+
     var showScrollbarY = this._showScrollbarY(state);
 
     return _React2.default.createElement(_FixedDataTableBufferedRows2.default, {
