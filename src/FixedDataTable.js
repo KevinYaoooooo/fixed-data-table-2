@@ -13,10 +13,6 @@
 
 /*eslint no-bitwise:1*/
 
-
-import './css/style/fixedDataTable.css';
-import './css/layout/fixedDataTableLayout.css';
-
 import React from 'React';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';

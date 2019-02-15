@@ -10,8 +10,6 @@
  * @typechecks
  */
 
-import './css/layout/fixedDataTableCellLayout.css';
-
 import React from 'React';
 
 import PropTypes from 'prop-types';
