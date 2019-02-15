@@ -1,9 +1,5 @@
 'use strict';
 
-require('./css/layout/fixedDataTableColumnResizerLineLayout.css');
-
-require('./css/style/fixedDataTableColumnResizerLine.css');
-
 var _DOMMouseMoveTracker = require('./DOMMouseMoveTracker');
 
 var _DOMMouseMoveTracker2 = _interopRequireDefault(_DOMMouseMoveTracker);

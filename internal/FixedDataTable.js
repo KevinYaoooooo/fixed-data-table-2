@@ -15,10 +15,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /*eslint no-bitwise:1*/
 
-require('./css/style/fixedDataTable.css');
-
-require('./css/layout/fixedDataTableLayout.css');
-
 var _React = require('./React');
 
 var _React2 = _interopRequireDefault(_React);

@@ -1,9 +1,5 @@
 'use strict';
 
-require('./css/style/Scrollbar.css');
-
-require('./css/layout/ScrollbarLayout.css');
-
 var _DOMMouseMoveTracker = require('./DOMMouseMoveTracker');
 
 var _DOMMouseMoveTracker2 = _interopRequireDefault(_DOMMouseMoveTracker);
