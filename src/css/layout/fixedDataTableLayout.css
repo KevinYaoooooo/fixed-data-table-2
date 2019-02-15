@@ -28,6 +28,15 @@
   border-top-width: 1px;
 }
 
+.fixedDataTableLayout/noRowWrapper {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  display: inline-block;
+  vertical-align: middle;
+  padding-top: 20px;
+}
+
 .fixedDataTableLayout/topShadow,
 .fixedDataTableLayout/bottomShadow {
   height: 4px;

@@ -180,6 +180,11 @@ var FixedDataTable = createReactClass({
     rowsCount: PropTypes.number.isRequired,
 
     /**
+     * Render the placeholder content if no rows (rowCount = 0).
+     */
+    noRowRenderer: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+
+    /**
      * Pixel height of rows unless `rowHeightGetter` is specified and returns
      * different value.
      */
@@ -435,6 +440,7 @@ var FixedDataTable = createReactClass({
       stopScrollPropagation: false,
 
       disableResize: false,
+      noRowRenderer: null,
     };
   },
 
@@ -848,8 +854,28 @@ var FixedDataTable = createReactClass({
     );
   },
 
+  _renderNoRow() {
+    var props = this.props;
+    var noRowRenderer = props.noRowRenderer;
+    var noRowContent = typeof noRowRenderer === 'function' ? noRowRenderer() : noRowRenderer;
+    var rowHeight = props.rowHeight;
+    var noRowHeight = `calc(100% - ${rowHeight}px)`;
+
+    return (
+      <div
+        style={{ top: rowHeight, width: '100%', height: noRowHeight }}
+        className={cx('fixedDataTableLayout/noRowWrapper')}>
+        {noRowContent}
+      </div>
+    );
+  },
+
   _renderRows(/*number*/ offsetTop) /*object*/ {
     var state = this.state;
+    if (state.rowsCount <= 0) {
+      return this._renderNoRow();
+    }
+
     var showScrollbarY = this._showScrollbarY(state);
 
     return (
