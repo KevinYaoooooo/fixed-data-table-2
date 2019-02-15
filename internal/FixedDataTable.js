@@ -836,13 +836,13 @@ var FixedDataTable = (0, _createReactClass2.default)({
     var props = this.props;
     var noRowRenderer = props.noRowRenderer;
     var noRowContent = typeof noRowRenderer === 'function' ? noRowRenderer() : noRowRenderer;
-    var rowHeight = props.rowHeight;
-    var noRowHeight = 'calc(100% - ' + rowHeight + 'px)';
+    var headerHeight = props.headerHeight;
+    var noRowHeight = 'calc(100% - ' + headerHeight + 'px)';
 
     return _React2.default.createElement(
       'div',
       {
-        style: { top: rowHeight, width: '100%', height: noRowHeight },
+        style: { top: headerHeight, width: '100%', height: noRowHeight },
         className: (0, _cx2.default)('fixedDataTableLayout/noRowWrapper') },
       noRowContent
     );
