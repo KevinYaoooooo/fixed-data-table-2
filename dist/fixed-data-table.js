@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.8.26 
+ * FixedDataTable v0.8.27 
  *
  * Copyright Schrodinger, LLC
  * All rights reserved.
@@ -3925,7 +3925,10 @@ var FixedDataTable = (0, _createReactClass2.default)({
     this._didScrollStop = (0, _debounceCore2.default)(this._didScrollStopSync, 200, this);
 
     this._wheelHandler = new _ReactWheelHandler2.default(this._onScroll, this._shouldHandleWheelX, this._shouldHandleWheelY, props.stopScrollPropagation);
-    this._touchHandler = new _ReactTouchHandler2.default(this._onScroll, this._shouldHandleTouchX, this._shouldHandleTouchY, props.stopScrollPropagation);
+
+    if (props.touchScrollEnabled) {
+      this._touchHandler = new _ReactTouchHandler2.default(this._onScroll, this._shouldHandleTouchX, this._shouldHandleTouchY, props.stopScrollPropagation);
+    }
 
     this.setState(this._calculateState(props));
   },
@@ -4223,10 +4226,10 @@ var FixedDataTable = (0, _createReactClass2.default)({
         tabIndex: tabIndex,
         onKeyDown: this._onKeyDown,
         onWheel: this._wheelHandler.onWheel,
-        onTouchStart: this._touchHandler.onTouchStart,
-        onTouchEnd: this._touchHandler.onTouchEnd,
-        onTouchMove: this._touchHandler.onTouchMove,
-        onTouchCancel: this._touchHandler.onTouchCancel,
+        onTouchStart: this._touchHandler && this._touchHandler.onTouchStart,
+        onTouchEnd: this._touchHandler && this._touchHandler.onTouchEnd,
+        onTouchMove: this._touchHandler && this._touchHandler.onTouchMove,
+        onTouchCancel: this._touchHandler && this._touchHandler.onTouchCancel,
         ref: this._onRef,
         style: { height: state.height, width: state.width } },
       _React2.default.createElement(
