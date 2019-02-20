@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.8.27 
+ * FixedDataTable v0.8.28 
  *
  * Copyright Schrodinger, LLC
  * All rights reserved.
@@ -2338,6 +2338,7 @@ var FixedDataTableRowImpl = function (_React$Component) {
       var fixedColumnsWidth = this._getColumnsWidth(this.props.fixedColumns);
       var fixedColumns = _React2.default.createElement(_FixedDataTableCellGroup2.default, {
         key: 'fixed_cells',
+        forceToRerender: this.props.forceToRerender,
         isScrolling: this.props.isScrolling,
         height: this.props.height,
         cellGroupWrapperHeight: this.props.cellGroupWrapperHeight,
@@ -2362,6 +2363,7 @@ var FixedDataTableRowImpl = function (_React$Component) {
       var scrollbarOffset = this.props.showScrollbarY ? _Scrollbar2.default.SIZE : 0;
       var fixedRightColumns = _React2.default.createElement(_FixedDataTableCellGroup2.default, {
         key: 'fixed_right_cells',
+        forceToRerender: this.props.forceToRerender,
         isScrolling: this.props.isScrolling,
         height: this.props.height,
         cellGroupWrapperHeight: this.props.cellGroupWrapperHeight,
@@ -2384,6 +2386,7 @@ var FixedDataTableRowImpl = function (_React$Component) {
       var fixedRightColumnsShadow = fixedRightColumnsWidth ? this._renderFixedRightColumnsShadow(this.props.width - fixedRightColumnsWidth - scrollbarOffset - 5) : null;
       var scrollableColumns = _React2.default.createElement(_FixedDataTableCellGroup2.default, {
         key: 'scrollable_cells',
+        forceToRerender: this.props.forceToRerender,
         isScrolling: this.props.isScrolling,
         height: this.props.height,
         cellGroupWrapperHeight: this.props.cellGroupWrapperHeight,
@@ -3650,6 +3653,11 @@ var FixedDataTable = (0, _createReactClass2.default)({
     rowsCount: _propTypes2.default.number.isRequired,
 
     /**
+     * Flag for for re-render the rows(including the cells) when rowsCount changed
+     */
+    reRenderRowsWhenRowsCountChanged: _propTypes2.default.bool,
+
+    /**
      * Render the placeholder content if no rows (rowCount = 0).
      */
     noRowRenderer: _propTypes2.default.oneOfType([_propTypes2.default.node, _propTypes2.default.func]),
@@ -3913,7 +3921,8 @@ var FixedDataTable = (0, _createReactClass2.default)({
 
       disableResize: false,
       scrollColumnToCenter: false,
-      noRowRenderer: null
+      noRowRenderer: null,
+      reRenderCellsWhenRowsCountChanged: false
     };
   },
   componentWillMount: function componentWillMount() {
@@ -4293,6 +4302,7 @@ var FixedDataTable = (0, _createReactClass2.default)({
       onRowTouchMove: state.touchScrollEnabled ? state.onRowTouchMove : null,
       rowClassNameGetter: state.rowClassNameGetter,
       rowsCount: state.rowsCount,
+      reRenderRowsWhenRowsCountChanged: this.props.reRenderRowsWhenRowsCountChanged,
       rowGetter: state.rowGetter,
       rowHeightGetter: state.rowHeightGetter,
       subRowHeight: state.subRowHeight,
@@ -7947,7 +7957,9 @@ var FixedDataTableBufferedRows = (0, _createReactClass2.default)({
     scrollLeft: _propTypes2.default.number.isRequired,
     scrollableColumns: _propTypes2.default.array.isRequired,
     showLastRowBorder: _propTypes2.default.bool,
-    width: _propTypes2.default.number.isRequired
+    width: _propTypes2.default.number.isRequired,
+
+    reRenderRowsWhenRowsCountChanged: _propTypes2.default.bool
   },
 
   getInitialState: function getInitialState() /*object*/{
@@ -7972,6 +7984,7 @@ var FixedDataTableBufferedRows = (0, _createReactClass2.default)({
       this._updateBuffer();
     } else {
       this.setState({
+        forceToRerender: nextProps.rowsCount !== this.props.rowsCount && nextProps.reRenderRowsWhenRowsCountChanged,
         rowsToRender: this._rowBuffer.getRows(nextProps.firstRowIndex, nextProps.firstRowOffset)
       });
     }
@@ -7997,6 +8010,7 @@ var FixedDataTableBufferedRows = (0, _createReactClass2.default)({
     var rowPositionGetter = props.rowPositionGetter;
 
     var rowsToRender = this.state.rowsToRender;
+    var forceToRerender = this.state.forceToRerender;
 
     //Sort the rows, we slice first to avoid changing original
     var sortedRowsToRender = rowsToRender.slice().sort(function (a, b) {
@@ -8024,6 +8038,7 @@ var FixedDataTableBufferedRows = (0, _createReactClass2.default)({
 
       this._staticRowArray[i] = _React2.default.createElement(_FixedDataTableRow2.default, {
         key: rowKey,
+        forceToRerender: forceToRerender,
         isScrolling: props.isScrolling,
         index: rowIndex,
         width: props.width,
@@ -8690,6 +8705,11 @@ var FixedDataTableCellGroupImpl = (0, _createReactClass2.default)({
     touchEnabled: _propTypes2.default.bool,
 
     /**
+     * Flag for for re-render the cell
+     */
+    forceToRerender: _propTypes2.default.bool,
+
+    /**
      * Flag to identify whether it's a header cell group or not
      */
     isHeaderCellGroup: _propTypes2.default.bool,
@@ -8783,6 +8803,7 @@ var FixedDataTableCellGroupImpl = (0, _createReactClass2.default)({
     }
 
     return _React2.default.createElement(_FixedDataTableCell2.default, {
+      forceToRerender: this.props.forceToRerender,
       isScrolling: this.props.isScrolling,
       align: columnProps.align,
       className: className,
@@ -9004,6 +9025,11 @@ var FixedDataTableCell = (0, _createReactClass2.default)({
     pureRendering: _propTypes2.default.bool,
 
     /**
+     * Flag for for re-render the cell
+     */
+    forceToRerender: _propTypes2.default.bool,
+
+    /**
      * Whether touch is enabled or not.
      */
     touchEnabled: _propTypes2.default.bool,
@@ -9028,6 +9054,10 @@ var FixedDataTableCell = (0, _createReactClass2.default)({
   shouldComponentUpdate: function shouldComponentUpdate(nextProps) {
     if (nextProps.isScrolling && this.props.rowIndex === nextProps.rowIndex) {
       return false;
+    }
+
+    if (nextProps.forceToRerender) {
+      return true;
     }
 
     //Performance check not enabled

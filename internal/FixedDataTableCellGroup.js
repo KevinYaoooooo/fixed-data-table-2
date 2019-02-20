@@ -91,6 +91,11 @@ var FixedDataTableCellGroupImpl = (0, _createReactClass2.default)({
     touchEnabled: _propTypes2.default.bool,
 
     /**
+     * Flag for for re-render the cell
+     */
+    forceToRerender: _propTypes2.default.bool,
+
+    /**
      * Flag to identify whether it's a header cell group or not
      */
     isHeaderCellGroup: _propTypes2.default.bool,
@@ -184,6 +189,7 @@ var FixedDataTableCellGroupImpl = (0, _createReactClass2.default)({
     }
 
     return _React2.default.createElement(_FixedDataTableCell2.default, {
+      forceToRerender: this.props.forceToRerender,
       isScrolling: this.props.isScrolling,
       align: columnProps.align,
       className: className,

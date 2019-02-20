@@ -80,7 +80,9 @@ var FixedDataTableBufferedRows = (0, _createReactClass2.default)({
     scrollLeft: _propTypes2.default.number.isRequired,
     scrollableColumns: _propTypes2.default.array.isRequired,
     showLastRowBorder: _propTypes2.default.bool,
-    width: _propTypes2.default.number.isRequired
+    width: _propTypes2.default.number.isRequired,
+
+    reRenderRowsWhenRowsCountChanged: _propTypes2.default.bool
   },
 
   getInitialState: function getInitialState() /*object*/{
@@ -105,6 +107,7 @@ var FixedDataTableBufferedRows = (0, _createReactClass2.default)({
       this._updateBuffer();
     } else {
       this.setState({
+        forceToRerender: nextProps.rowsCount !== this.props.rowsCount && nextProps.reRenderRowsWhenRowsCountChanged,
         rowsToRender: this._rowBuffer.getRows(nextProps.firstRowIndex, nextProps.firstRowOffset)
       });
     }
@@ -130,6 +133,7 @@ var FixedDataTableBufferedRows = (0, _createReactClass2.default)({
     var rowPositionGetter = props.rowPositionGetter;
 
     var rowsToRender = this.state.rowsToRender;
+    var forceToRerender = this.state.forceToRerender;
 
     //Sort the rows, we slice first to avoid changing original
     var sortedRowsToRender = rowsToRender.slice().sort(function (a, b) {
@@ -157,6 +161,7 @@ var FixedDataTableBufferedRows = (0, _createReactClass2.default)({
 
       this._staticRowArray[i] = _React2.default.createElement(_FixedDataTableRow2.default, {
         key: rowKey,
+        forceToRerender: forceToRerender,
         isScrolling: props.isScrolling,
         index: rowIndex,
         width: props.width,

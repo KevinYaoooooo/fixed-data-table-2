@@ -112,6 +112,11 @@ var FixedDataTableCell = (0, _createReactClass2.default)({
     pureRendering: _propTypes2.default.bool,
 
     /**
+     * Flag for for re-render the cell
+     */
+    forceToRerender: _propTypes2.default.bool,
+
+    /**
      * Whether touch is enabled or not.
      */
     touchEnabled: _propTypes2.default.bool,
@@ -136,6 +141,10 @@ var FixedDataTableCell = (0, _createReactClass2.default)({
   shouldComponentUpdate: function shouldComponentUpdate(nextProps) {
     if (nextProps.isScrolling && this.props.rowIndex === nextProps.rowIndex) {
       return false;
+    }
+
+    if (nextProps.forceToRerender) {
+      return true;
     }
 
     //Performance check not enabled

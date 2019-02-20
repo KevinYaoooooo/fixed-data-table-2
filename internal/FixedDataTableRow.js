@@ -186,6 +186,7 @@ var FixedDataTableRowImpl = function (_React$Component) {
       var fixedColumnsWidth = this._getColumnsWidth(this.props.fixedColumns);
       var fixedColumns = _React2.default.createElement(_FixedDataTableCellGroup2.default, {
         key: 'fixed_cells',
+        forceToRerender: this.props.forceToRerender,
         isScrolling: this.props.isScrolling,
         height: this.props.height,
         cellGroupWrapperHeight: this.props.cellGroupWrapperHeight,
@@ -210,6 +211,7 @@ var FixedDataTableRowImpl = function (_React$Component) {
       var scrollbarOffset = this.props.showScrollbarY ? _Scrollbar2.default.SIZE : 0;
       var fixedRightColumns = _React2.default.createElement(_FixedDataTableCellGroup2.default, {
         key: 'fixed_right_cells',
+        forceToRerender: this.props.forceToRerender,
         isScrolling: this.props.isScrolling,
         height: this.props.height,
         cellGroupWrapperHeight: this.props.cellGroupWrapperHeight,
@@ -232,6 +234,7 @@ var FixedDataTableRowImpl = function (_React$Component) {
       var fixedRightColumnsShadow = fixedRightColumnsWidth ? this._renderFixedRightColumnsShadow(this.props.width - fixedRightColumnsWidth - scrollbarOffset - 5) : null;
       var scrollableColumns = _React2.default.createElement(_FixedDataTableCellGroup2.default, {
         key: 'scrollable_cells',
+        forceToRerender: this.props.forceToRerender,
         isScrolling: this.props.isScrolling,
         height: this.props.height,
         cellGroupWrapperHeight: this.props.cellGroupWrapperHeight,
