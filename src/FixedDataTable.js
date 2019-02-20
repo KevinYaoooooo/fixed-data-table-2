@@ -291,6 +291,11 @@ var FixedDataTable = createReactClass({
     scrollToColumn: PropTypes.number,
 
     /**
+     * Index of column to scroll to, scroll this column to center
+     */
+    scrollColumnToCenter: PropTypes.bool,
+
+    /**
      * Value of vertical scroll.
      */
     scrollTop: PropTypes.number,
@@ -440,6 +445,7 @@ var FixedDataTable = createReactClass({
       stopScrollPropagation: false,
 
       disableResize: false,
+      scrollColumnToCenter: false,
       noRowRenderer: null,
     };
   },
@@ -1312,6 +1318,11 @@ var FixedDataTable = createReactClass({
         // to be in viewport (availableScrollWidth = viewport width)
         var minAcceptableScrollPosition =
           previousColumnsWidth + selectedColumnWidth - availableScrollWidth;
+
+        if (props.scrollColumnToCenter) {
+          var centerPosExtraWidthOffset = (availableScrollWidth - selectedColumnWidth) / 2;
+          minAcceptableScrollPosition += centerPosExtraWidthOffset;
+        }
 
         // If scrolled less than minimum amount, scroll to minimum amount
         // so column on right of viewport
