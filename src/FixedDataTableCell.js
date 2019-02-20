@@ -87,6 +87,11 @@ var FixedDataTableCell = createReactClass({
     pureRendering: PropTypes.bool,
 
     /**
+     * Flag for for re-render the cell
+     */
+    forceToRerender: PropTypes.bool,
+
+    /**
      * Whether touch is enabled or not.
      */
     touchEnabled: PropTypes.bool,
@@ -112,6 +117,10 @@ var FixedDataTableCell = createReactClass({
   shouldComponentUpdate(nextProps) {
     if (nextProps.isScrolling && this.props.rowIndex === nextProps.rowIndex) {
       return false;
+    }
+
+    if (nextProps.forceToRerender) {
+      return true;
     }
 
     //Performance check not enabled

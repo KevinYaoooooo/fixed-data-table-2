@@ -58,6 +58,8 @@ var FixedDataTableBufferedRows = createReactClass({
     scrollableColumns: PropTypes.array.isRequired,
     showLastRowBorder: PropTypes.bool,
     width: PropTypes.number.isRequired,
+
+    reRenderRowsWhenRowsCountChanged: PropTypes.bool,
   },
 
   getInitialState() /*object*/ {
@@ -104,6 +106,8 @@ var FixedDataTableBufferedRows = createReactClass({
       this._updateBuffer();
     } else {
       this.setState({
+        forceToRerender: nextProps.rowsCount !== this.props.rowsCount
+          && nextProps.reRenderRowsWhenRowsCountChanged,
         rowsToRender: this._rowBuffer.getRows(
           nextProps.firstRowIndex,
           nextProps.firstRowOffset
@@ -136,6 +140,7 @@ var FixedDataTableBufferedRows = createReactClass({
     var rowPositionGetter = props.rowPositionGetter;
 
     var rowsToRender = this.state.rowsToRender;
+    var forceToRerender = this.state.forceToRerender;
 
     //Sort the rows, we slice first to avoid changing original
     var sortedRowsToRender = rowsToRender.slice().sort((a, b) => a - b);
@@ -163,6 +168,7 @@ var FixedDataTableBufferedRows = createReactClass({
       this._staticRowArray[i] =
         <FixedDataTableRow
           key={rowKey}
+          forceToRerender={forceToRerender}
           isScrolling={props.isScrolling}
           index={rowIndex}
           width={props.width}

@@ -177,6 +177,7 @@ class FixedDataTableRowImpl extends React.Component {
     var fixedColumns =
       <FixedDataTableCellGroup
         key="fixed_cells"
+        forceToRerender={this.props.forceToRerender}
         isScrolling={this.props.isScrolling}
         height={this.props.height}
         cellGroupWrapperHeight={this.props.cellGroupWrapperHeight}
@@ -202,6 +203,7 @@ class FixedDataTableRowImpl extends React.Component {
     var fixedRightColumns =
       <FixedDataTableCellGroup
         key="fixed_right_cells"
+        forceToRerender={this.props.forceToRerender}
         isScrolling={this.props.isScrolling}
         height={this.props.height}
         cellGroupWrapperHeight={this.props.cellGroupWrapperHeight}
@@ -226,6 +228,7 @@ class FixedDataTableRowImpl extends React.Component {
     var scrollableColumns =
       <FixedDataTableCellGroup
         key="scrollable_cells"
+        forceToRerender={this.props.forceToRerender}
         isScrolling={this.props.isScrolling}
         height={this.props.height}
         cellGroupWrapperHeight={this.props.cellGroupWrapperHeight}

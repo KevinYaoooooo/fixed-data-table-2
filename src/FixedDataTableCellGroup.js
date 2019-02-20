@@ -66,6 +66,11 @@ var FixedDataTableCellGroupImpl = createReactClass({
     touchEnabled: PropTypes.bool,
 
     /**
+     * Flag for for re-render the cell
+     */
+    forceToRerender: PropTypes.bool,
+
+    /**
      * Flag to identify whether it's a header cell group or not
      */
     isHeaderCellGroup: PropTypes.bool,
@@ -180,6 +185,7 @@ var FixedDataTableCellGroupImpl = createReactClass({
 
     return (
       <FixedDataTableCell
+        forceToRerender={this.props.forceToRerender}
         isScrolling={this.props.isScrolling}
         align={columnProps.align}
         className={className}

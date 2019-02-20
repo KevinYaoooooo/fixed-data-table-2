@@ -180,6 +180,11 @@ var FixedDataTable = createReactClass({
     rowsCount: PropTypes.number.isRequired,
 
     /**
+     * Flag for for re-render the rows(including the cells) when rowsCount changed
+     */
+    reRenderRowsWhenRowsCountChanged: PropTypes.bool,
+
+    /**
      * Render the placeholder content if no rows (rowCount = 0).
      */
     noRowRenderer: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
@@ -447,6 +452,7 @@ var FixedDataTable = createReactClass({
       disableResize: false,
       scrollColumnToCenter: false,
       noRowRenderer: null,
+      reRenderCellsWhenRowsCountChanged: false,
     };
   },
 
@@ -909,6 +915,7 @@ var FixedDataTable = createReactClass({
         onRowTouchMove={state.touchScrollEnabled ? state.onRowTouchMove : null}
         rowClassNameGetter={state.rowClassNameGetter}
         rowsCount={state.rowsCount}
+        reRenderRowsWhenRowsCountChanged={this.props.reRenderRowsWhenRowsCountChanged}
         rowGetter={state.rowGetter}
         rowHeightGetter={state.rowHeightGetter}
         subRowHeight={state.subRowHeight}
