@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.8.25 
+ * FixedDataTable v0.8.26 
  *
  * Copyright Schrodinger, LLC
  * All rights reserved.
@@ -3758,6 +3758,11 @@ var FixedDataTable = (0, _createReactClass2.default)({
     scrollToColumn: _propTypes2.default.number,
 
     /**
+     * Index of column to scroll to, scroll this column to center
+     */
+    scrollColumnToCenter: _propTypes2.default.bool,
+
+    /**
      * Value of vertical scroll.
      */
     scrollTop: _propTypes2.default.number,
@@ -3907,6 +3912,7 @@ var FixedDataTable = (0, _createReactClass2.default)({
       stopScrollPropagation: false,
 
       disableResize: false,
+      scrollColumnToCenter: false,
       noRowRenderer: null
     };
   },
@@ -4628,6 +4634,11 @@ var FixedDataTable = (0, _createReactClass2.default)({
         // Must scroll at least far enough for end of column (prevColWidth + selColWidth)
         // to be in viewport (availableScrollWidth = viewport width)
         var minAcceptableScrollPosition = previousColumnsWidth + selectedColumnWidth - availableScrollWidth;
+
+        if (props.scrollColumnToCenter) {
+          var centerPosExtraWidthOffset = (availableScrollWidth - selectedColumnWidth) / 2;
+          minAcceptableScrollPosition += centerPosExtraWidthOffset;
+        }
 
         // If scrolled less than minimum amount, scroll to minimum amount
         // so column on right of viewport
