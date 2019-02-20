@@ -475,12 +475,15 @@ var FixedDataTable = createReactClass({
       this._shouldHandleWheelY,
       props.stopScrollPropagation
     );
-    this._touchHandler = new ReactTouchHandler(
-      this._onScroll,
-      this._shouldHandleTouchX,
-      this._shouldHandleTouchY,
-      props.stopScrollPropagation
-    );
+
+    if (props.touchScrollEnabled) {
+      this._touchHandler = new ReactTouchHandler(
+        this._onScroll,
+        this._shouldHandleTouchX,
+        this._shouldHandleTouchY,
+        props.stopScrollPropagation
+      );
+    }
 
     this.setState(this._calculateState(props));
   },
@@ -837,10 +840,10 @@ var FixedDataTable = createReactClass({
         tabIndex={tabIndex}
         onKeyDown={this._onKeyDown}
         onWheel={this._wheelHandler.onWheel}
-        onTouchStart={this._touchHandler.onTouchStart}
-        onTouchEnd={this._touchHandler.onTouchEnd}
-        onTouchMove={this._touchHandler.onTouchMove}
-        onTouchCancel={this._touchHandler.onTouchCancel}
+        onTouchStart={this._touchHandler && this._touchHandler.onTouchStart}
+        onTouchEnd={this._touchHandler && this._touchHandler.onTouchEnd}
+        onTouchMove={this._touchHandler && this._touchHandler.onTouchMove}
+        onTouchCancel={this._touchHandler && this._touchHandler.onTouchCancel}
         ref={this._onRef}
         style={{height: state.height, width: state.width}}>
         <div
