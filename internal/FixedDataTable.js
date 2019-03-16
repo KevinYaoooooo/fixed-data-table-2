@@ -537,6 +537,7 @@ var FixedDataTable = (0, _createReactClass2.default)({
     // Cancel any pending debounced scroll handling and handle immediately.
     this._didScrollStop.reset();
     this._didScrollStopSync();
+    this.mainRef && this.mainRef.removeEventListener('wheel', this._wheelHandler.onWheel);
   },
   _shouldHandleTouchX: function _shouldHandleTouchX( /*number*/delta) /*boolean*/{
     return this.props.touchScrollEnabled && this._shouldHandleWheelX(delta);
@@ -633,6 +634,7 @@ var FixedDataTable = (0, _createReactClass2.default)({
   },
   componentDidMount: function componentDidMount() {
     this._reportContentHeight();
+    this.mainRef && this.mainRef.addEventListener('wheel', this._wheelHandler.onWheel, { passive: false });
   },
   componentWillReceiveProps: function componentWillReceiveProps( /*object*/nextProps) {
     var newOverflowX = nextProps.overflowX;
@@ -658,6 +660,8 @@ var FixedDataTable = (0, _createReactClass2.default)({
     }
   },
   render: function render() /*object*/{
+    var _this = this;
+
     var state = this.state;
     var props = this.props;
 
@@ -822,13 +826,15 @@ var FixedDataTable = (0, _createReactClass2.default)({
       {
         className: (0, _joinClasses2.default)(this.state.className, (0, _cx2.default)('fixedDataTableLayout/main'), (0, _cx2.default)('public/fixedDataTable/main')),
         tabIndex: tabIndex,
-        onKeyDown: this._onKeyDown,
-        onWheel: this._wheelHandler.onWheel,
-        onTouchStart: this._touchHandler && this._touchHandler.onTouchStart,
+        onKeyDown: this._onKeyDown
+        // onWheel={this._wheelHandler.onWheel}
+        , onTouchStart: this._touchHandler && this._touchHandler.onTouchStart,
         onTouchEnd: this._touchHandler && this._touchHandler.onTouchEnd,
         onTouchMove: this._touchHandler && this._touchHandler.onTouchMove,
         onTouchCancel: this._touchHandler && this._touchHandler.onTouchCancel,
-        ref: this._onRef,
+        ref: function ref(divRef) {
+          _this.mainRef = divRef;
+        } /*this._onRef*/,
         style: { height: state.height, width: state.width } },
       _React2.default.createElement(
         'div',
