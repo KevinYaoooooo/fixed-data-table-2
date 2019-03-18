@@ -531,13 +531,13 @@ var FixedDataTable = (0, _createReactClass2.default)({
     this.setState(this._calculateState(props));
   },
   componentWillUnmount: function componentWillUnmount() {
+    this.mainRef && this.mainRef.removeEventListener('wheel', this._wheelHandler.onWheel, { passive: false });
     this._wheelHandler = null;
     this._touchHandler = null;
 
     // Cancel any pending debounced scroll handling and handle immediately.
     this._didScrollStop.reset();
     this._didScrollStopSync();
-    this.mainRef && this.mainRef.removeEventListener('wheel', this._wheelHandler.onWheel);
   },
   _shouldHandleTouchX: function _shouldHandleTouchX( /*number*/delta) /*boolean*/{
     return this.props.touchScrollEnabled && this._shouldHandleWheelX(delta);
