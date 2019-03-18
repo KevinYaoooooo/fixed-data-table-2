@@ -495,16 +495,17 @@ var FixedDataTable = createReactClass({
   },
 
   componentWillUnmount() {
+    this.mainRef && this.mainRef.removeEventListener(
+      'wheel',
+      this._wheelHandler.onWheel,
+      { passive: false }
+    );
     this._wheelHandler = null;
     this._touchHandler = null;
 
     // Cancel any pending debounced scroll handling and handle immediately.
     this._didScrollStop.reset();
     this._didScrollStopSync();
-    this.mainRef && this.mainRef.removeEventListener(
-      'wheel',
-      this._wheelHandler.onWheel,
-    )
   },
 
   _shouldHandleTouchX(/*number*/ delta) /*boolean*/ {
