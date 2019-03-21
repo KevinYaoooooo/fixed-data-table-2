@@ -495,7 +495,7 @@ var FixedDataTable = createReactClass({
   },
 
   componentWillUnmount() {
-    this.mainRef && this.mainRef.removeEventListener(
+    window.document.removeEventListener(
       'wheel',
       this._wheelHandler.onWheel,
       { passive: false }
@@ -616,7 +616,7 @@ var FixedDataTable = createReactClass({
 
   componentDidMount() {
     this._reportContentHeight();
-    this.mainRef && this.mainRef.addEventListener(
+    window.document.addEventListener(
       'wheel',
       this._wheelHandler.onWheel,
       { passive: false }
