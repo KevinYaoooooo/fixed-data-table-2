@@ -531,7 +531,7 @@ var FixedDataTable = (0, _createReactClass2.default)({
     this.setState(this._calculateState(props));
   },
   componentWillUnmount: function componentWillUnmount() {
-    window.document.removeEventListener('wheel', this._wheelHandler.onWheel, { passive: false });
+    this.mainRef && this.mainRef.removeEventListener('wheel', this._wheelHandler.onWheel, { passive: false });
     this._wheelHandler = null;
     this._touchHandler = null;
 
@@ -634,7 +634,7 @@ var FixedDataTable = (0, _createReactClass2.default)({
   },
   componentDidMount: function componentDidMount() {
     this._reportContentHeight();
-    window.document.addEventListener('wheel', this._wheelHandler.onWheel, { passive: false });
+    this.mainRef && this.mainRef.addEventListener('wheel', this._wheelHandler.onWheel, { passive: false });
   },
   componentWillReceiveProps: function componentWillReceiveProps( /*object*/nextProps) {
     var newOverflowX = nextProps.overflowX;
