@@ -1,6 +1,6 @@
 {
-  "name": "fixed-data-table-2",
-  "version": "0.8.32",
+  "name": "@ones-ai/fixed-data-table-2",
+  "version": "0.8.33",
   "description": "A React table component designed to allow presenting thousands of rows of data.",
   "main": "main.js",
   "peerDependencies": {
@@ -70,13 +70,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/schrodinger/fixed-data-table-2.git"
+    "url": "https://github.com/KevinYaoooooo/fixed-data-table-2.git"
   },
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/schrodinger/fixed-data-table-2/issues"
+    "url": "https://github.com/KevinYaoooooo/fixed-data-table-2/issues"
   },
-  "homepage": "http://schrodinger.github.io/fixed-data-table-2",
+  "homepage": "http://KevinYaoooooo.github.io/fixed-data-table-2",
   "tags": [
     "react",
     "table"
